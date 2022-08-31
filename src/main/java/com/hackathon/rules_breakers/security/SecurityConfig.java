@@ -29,8 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .authorizeRequests().anyRequest().permitAll()
-              /*  .antMatchers(HttpMethod.GET , "/category").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET , "/book").hasRole("ADMIN") */
                 .and()
                 .formLogin()
                 .loginPage("http://localhost:3000/")

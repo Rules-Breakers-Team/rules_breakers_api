@@ -42,7 +42,6 @@ public class TypeController {
   ){
     return typeService.getTypeById(id);
   }
-
   @PostMapping
   public String addType(@RequestBody List<com.hackathon.rules_breakers.model.post.Type> type){
     List<Type> typeList = type.stream().map(typeMapper :: toDomain).toList();
