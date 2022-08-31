@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.data.domain.Sort.Direction.DESC;
 
@@ -20,5 +21,12 @@ public class BookingService {
   public List<Booking> findAllBooking(int page, int pageSize) {
     Pageable pageable = PageRequest.of(page, pageSize, Sort.by(DESC, "bookingDate"));
     return repository.findAll(pageable).toList();
+  }
+  public List<Booking> saveAllBooking(List<Booking> toCreate){
+    return repository.saveAll(toCreate);
+  }
+
+  public Booking updateBooking(Booking toUpdate) {
+    return repository.save(toUpdate);
   }
 }
