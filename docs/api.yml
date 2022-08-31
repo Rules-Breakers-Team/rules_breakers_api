@@ -66,34 +66,6 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schemas/badrequest'
-    delete:
-      tags:
-        - Room
-      summary: Remove rooms from the list
-      description: How to remove a room from the rooms list
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                type: object
-                properties:
-                  id: 
-                    type: integer
-                    example: 1
-      responses:
-        200:
-          description: Rooms successfully deleted
-          content:
-            text/plain:
-              example: Rooms successfully deleted
-        400:
-          description: Bad request
-          content:
-            application/json:
-              schema: 
-                $ref: '#/components/schemas/badrequest'
   /rooms/{id}:
     get: 
       tags:
@@ -163,11 +135,58 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schemas/badrequest'
-    delete:
+  /types:
+    get:
       tags:
-        - Room
-      summary: Remove a specific room from the list
-      description: Delete the room having the entered id from the list
+        - Type
+      summary: Get rooms type
+      description: How to get the rooms type
+      responses:
+        200:
+          description: List of room types
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/type'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+    post:   
+      tags:
+        - Type
+      summary: Add new room type
+      description: How to add new room type
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items:
+                $ref: '#/components/schemas/addType'
+        required: true
+      responses:
+        200:
+          description: Types successfully added 
+          content:
+            text/plain:
+              example: Types successfully added
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+  /types/{id}:
+    get: 
+      tags:
+        - Type
+      summary: Get room type details
+      description: Get details on the room type having the entered id
       parameters:
         - name: id
           in: query
@@ -177,10 +196,59 @@ paths:
           required: true
       responses:
         200:
-          description: Room successfully deleted
+          description: Details about a room type
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/type'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+    put: 
+      tags:
+        - Type
+      summary: Modify room type details
+      description: |
+        Possible changes/updates on: 
+          * type's name
+          * type's description
+          * type's price 
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            example: 1
+          required: true
+      requestBody:
+        description: informations to be changed 
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/type'
+            examples:
+              UpdadeName: 
+                description: change/update type's name
+                value: 
+                  new_name: Suit
+              UpdateDescription:
+                description: change/update type's description
+                value:
+                  new_description: Obama's Suit
+              UpdatePrice: 
+                description: change/update type's price
+                value:
+                  new_price: 250.000 Ar
+        required: true
+      responses:
+        200:
+          description: Informations updated
           content:
             text/plain:
-              example: Room successfully deleted
+              example: Informations updated
         400:
           description: Bad request
           content:
@@ -221,8 +289,8 @@ components:
           example: lorem ipsum
         type:
           $ref: '#/components/schemas/type'
-    type:
-      description: rooms type
+    addType:
+      description: add a room type
       type: object
       properties:
         name: 
@@ -234,3 +302,12 @@ components:
         price: 
           type: string
           example: "100.000 Ar"
+    type:
+      description: rooms type
+      allOf:
+        - $ref: '#/components/schemas/addType'
+      type: object
+      properties:
+        id: 
+          type: integer
+          example: 1
