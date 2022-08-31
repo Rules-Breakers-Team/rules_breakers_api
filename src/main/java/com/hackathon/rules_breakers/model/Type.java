@@ -6,11 +6,13 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @Entity
+@Builder
 public class Type implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
