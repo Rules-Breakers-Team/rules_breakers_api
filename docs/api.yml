@@ -1,6 +1,6 @@
 openapi: '3.0.2'
 info:
-  title: API Title
+  title: N Hotel API
   version: '1.0'
 servers:
   - url: https://localhost:8080/
