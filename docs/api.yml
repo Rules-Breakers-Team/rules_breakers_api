@@ -1,0 +1,233 @@
+openapi: '3.0.2'
+info:
+  title: API Title
+  version: '1.0'
+servers:
+  - url: https://localhost:8080/
+tags:
+  - name: Room
+paths:
+  /rooms:
+    get:
+      tags:
+        - Room
+      summary: Get list of rooms
+      description: How to get the list of the hotel's rooms
+      parameters:
+        - name: page
+          in: query
+          schema: 
+            type: integer
+            example: 1
+          required: true
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            example: 10
+          required: true
+      responses:
+        200:
+          description: List of the hotel's rooms
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/room'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+    post:
+      tags:
+        - Room
+      summary: Add new room
+      description: How to add a new room to the list
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items:
+                $ref: '#/components/schemas/addRoom'
+        required: true
+      responses:
+        200:
+          description: New room added to the list
+          content:
+            text/plain:
+              example: Room successfully added to the list 
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+    delete:
+      tags:
+        - Room
+      summary: Remove rooms from the list
+      description: How to remove a room from the rooms list
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id: 
+                    type: integer
+                    example: 1
+      responses:
+        200:
+          description: Rooms successfully deleted
+          content:
+            text/plain:
+              example: Rooms successfully deleted
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+  /rooms/{id}:
+    get: 
+      tags:
+        - Room
+      summary: Get info a room
+      description: Get informations of the room having the entered id
+      parameters:
+        - name: id 
+          in: query
+          schema: 
+            type: integer
+            example: 1
+          required: true
+      responses:
+        200:
+          description: Informations of a specified room
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/room'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+    put:
+      tags:
+        - Room
+      summary: Modify informations of the room having the entered id
+      description: |
+          Possible changes/updates on: 
+          * room's description
+          *room's type
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            example: 1
+          required: true
+      requestBody:
+        description: informations to be changed 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/room'
+            examples:
+              UpdateDescription:
+                description: change/update room's description
+                value:
+                  newDescription: George Washington's room
+              UpdateType: 
+                description: change/update room's type
+                value: 
+                  newType: Family
+        required: true
+      responses:
+        200:
+          description: Informations updated 
+          content:
+            text/plain:
+              example: Informations updated successfully
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+    delete:
+      tags:
+        - Room
+      summary: Remove a specific room from the list
+      description: Delete the room having the entered id from the list
+      parameters:
+        - name: id
+          in: query
+          schema: 
+            type: integer
+            example: 1
+          required: true
+      responses:
+        200:
+          description: Room successfully deleted
+          content:
+            text/plain:
+              example: Room successfully deleted
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+components:
+  schemas:
+    badrequest:
+      description: Bad request exception
+      type: object
+      properties:
+        type: 
+          type: string
+          example: BadRequestException
+        message:
+          type: string
+          example: Bad request
+    addRoom:
+      description: description of a new room
+      type: object
+      properties:
+        description: 
+          type: string
+          example: lorem ipsum
+        type:
+          type: string
+          example: double
+    room: 
+      description: description of a room
+      type: object
+      properties:
+        room_number:
+          type: number
+          example: 1
+        description: 
+          type: string
+          example: lorem ipsum
+        type:
+          $ref: '#/components/schemas/type'
+    type:
+      description: rooms type
+      type: object
+      properties:
+        name: 
+          type: string
+          example: double
+        price: 
+          type: string
+          example: "100.000 Ar"
