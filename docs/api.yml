@@ -141,6 +141,19 @@ paths:
         - Type
       summary: Get rooms type
       description: How to get the rooms type
+      parameters:
+        - name: page
+          in: query
+          schema: 
+            type: integer
+            example: 1
+          required: true
+        - name: page_size
+          in: query
+          schema: 
+            type: integer
+            example: 5
+          required: true
       responses:
         200:
           description: List of room types
