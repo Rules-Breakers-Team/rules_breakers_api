@@ -5,8 +5,139 @@ info:
 servers:
   - url: https://localhost:8080/
 tags:
+  - name: Booking
   - name: Room
+  - name: Type
 paths:
+  /booking:
+    get:
+      tags:
+        - Booking
+      summary: Get list of bookings
+      description: How to get booking List
+      parameters:
+        - name: page
+          in: query
+          schema: 
+            type: integer
+            example: 0
+          required: true
+        - name: page_size
+          in: query
+          schema: 
+            type: integer
+            example: 10
+          required: true  
+      responses:
+        200:
+          description: Booking list
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref : '#/components/schemas/booking'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+    post:
+      tags:
+        - Booking
+      summary: Make reservation
+      description: How to make a reservation
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items: 
+                $ref: '#/components/schemas/addBooking'
+        required: true
+      responses:
+        200:
+          description: Booking made 
+          content:
+            text/plain:
+              example: Booking made successfully
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+  /booking/{id}:
+    get: 
+      tags:
+        - Booking
+      summary: Get details of a booking
+      description: Get informations of the booking having the entered id
+      parameters:
+        - name: id 
+          in: path
+          schema: 
+            type: integer
+            example: 1
+          required: true
+      responses:
+        200:
+          description: Informations of the specified booking
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/booking'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+    put:
+      tags:
+        - Booking
+      summary: Modify informations of the booking having the entered id
+      description: |
+          Possible changes/updates on: 
+          * client's phone_number:
+          * room type
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            example: 1
+          required: true
+      requestBody:
+        description: informations to be changed 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/room'
+            examples:
+              UpdatePhoneNumber:
+                description: change/update client's phone number
+                value:
+                  newContact: "+261421412412"
+              UpdateRoomType: 
+                description: change/update room's type
+                value: 
+                  newType: Family
+        required: true
+      responses:
+        200:
+          description: Informations updated 
+          content:
+            text/plain:
+              example: Informations updated successfully
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+    
   /rooms:
     get:
       tags:
@@ -336,6 +467,31 @@ components:
         message:
           type: string
           example: Bad request
+    addBooking: 
+      description: description of a new booking
+      type: object
+      properties:
+        client: 
+            type: string
+            example: Carl Johnson
+        phone_number: 
+            type: string
+            example: "+261302112412"
+        booking_date:
+            type: string
+            format: date
+        room_type: 
+            type: string
+            example: double
+    booking:
+      description: description of a booking
+      allOf:
+        - $ref: '#/components/schemas/addBooking'
+      type: object
+      properties:
+        id: 
+          type: integer
+          example: 1
     addRoom:
       description: description of a new room
       type: object
