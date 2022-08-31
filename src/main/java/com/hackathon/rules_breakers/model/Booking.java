@@ -7,10 +7,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,21 +26,21 @@ import java.util.List;
 @Builder
 public class Booking implements Serializable {
 
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(nullable = false)
-    private String client;
+  @Column(nullable = false)
+  private String client;
 
-    @Column(nullable = false)
-    private String phone_number;
+  @Column(nullable = false)
+  private String phone_number;
 
-    @Column(nullable = false)
-    private Date bookingDate;
+  @Column(nullable = false)
+  private Date bookingDate;
 
-    @ManyToOne
-    @JoinColumn(name = "id_type")
-    private Type type;
+  @ManyToOne
+  @JoinColumn(name = "id_type")
+  private Type type;
 
 }
