@@ -135,6 +135,62 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schemas/badrequest'
+  /rooms/{available}:
+    get: 
+      tags:
+        - Room
+      summary: Get list of rooms according to their availability
+      description: How to filter rooms by their availability
+      parameters:
+        - name: available
+          in: query
+          schema: 
+            type: boolean
+            example: true
+          required: true
+      responses:
+        200:
+          description: List of rooms filtered by their availability
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: '#/components/schemas/room'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+  /rooms/{type}:
+    get:  
+      tags:
+        - Room
+      summary: Get list of rooms according to their type 
+      description: How to filter rooms by their type
+      parameters:
+        - name: type
+          in: query
+          schema: 
+            type: string
+            example: double
+          required: true
+      responses:
+        200:
+          description: List of rooms filtered by their type
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: '#/components/schemas/room'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
   /types:
     get:
       tags:
@@ -300,6 +356,8 @@ components:
         description: 
           type: string
           example: lorem ipsum
+        available: 
+          type: boolean
         type:
           $ref: '#/components/schemas/type'
     addType:
