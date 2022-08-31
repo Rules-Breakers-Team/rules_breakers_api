@@ -9,7 +9,7 @@ tags:
   - name: Room
   - name: Type
 paths:
-  /booking:
+  /bookings:
     get:
       tags:
         - Booking
@@ -68,7 +68,7 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schemas/badrequest'
-  /booking/{id}:
+  /bookings/{id}:
     get: 
       tags:
         - Booking
@@ -481,8 +481,8 @@ components:
             type: string
             format: date
         room_type: 
-            type: integer
-            example: 1
+            type: string
+            example: double
     booking:
       description: description of a booking
       allOf:
