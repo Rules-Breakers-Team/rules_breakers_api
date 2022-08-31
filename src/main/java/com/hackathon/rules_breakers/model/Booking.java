@@ -1,5 +1,7 @@
 package com.hackathon.rules_breakers.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,10 +18,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString
 @Entity
+@Builder
 public class Booking implements Serializable {
 
   @Id
@@ -33,7 +37,7 @@ public class Booking implements Serializable {
   private String phone_number;
 
   @Column(nullable = false)
-  private Date booking_date;
+  private Date bookingDate;
 
   @ManyToOne
   @JoinColumn(name = "id_type")

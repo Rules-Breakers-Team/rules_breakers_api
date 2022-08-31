@@ -60,6 +60,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>com.twilio.sdk</groupId>
+			<artifactId>twilio</artifactId>
+			<version>8.8.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.restdocs</groupId>
 			<artifactId>spring-restdocs-mockmvc</artifactId>
 			<scope>test</scope>
