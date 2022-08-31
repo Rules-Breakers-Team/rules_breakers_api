@@ -482,7 +482,7 @@ components:
             format: date
         room_type: 
             type: string
-            example: 1
+            example: double
     booking:
       description: description of a booking
       allOf:
