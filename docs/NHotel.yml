@@ -3,13 +3,16 @@ info:
   title: N Hotel API
   version: '1.0'
 servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/Oniitsiky/n-hotel_api_2/1.0
   - url: https://localhost:8080/
 tags:
   - name: Booking
   - name: Room
   - name: Type
 paths:
-  /bookings:
+  /booking:
     get:
       tags:
         - Booking
@@ -28,7 +31,7 @@ paths:
             type: integer
             example: 10
           required: true  
-      responses:
+      responses:  
         200:
           description: Booking list
           content:
@@ -37,6 +40,43 @@ paths:
                 type: array
                 items: 
                   $ref : '#/components/schemas/booking'
+              example: 
+                - client: "Someone"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  roomType: "suite"
+                  bookingStart: "2022-10-10"
+                  roomNumber: 2
+                - client: "Carl Johnson"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  roomType: "double"
+                  bookingStart: "2022-10-10"
+                  roomNumber: 3
+                - client: "Luke"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  roomType: "double"
+                  bookingStart: "2022-10-10"
+                  roomNumber: 2
+                - client: "Byer"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  bookingStart: "2022-10-10"
+                  roomType: "familial"
+                  roomNumber: 24
+                - client: "Billy"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  roomType: "double"
+                  bookingStart: "2022-10-10"
+                  roomNumber: 21
+                - client: "Dustin"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  roomType: "suit"
+                  bookingStart: "2022-10-10"
+                  roomNumber: 9
         400:
           description: Bad request
           content:
@@ -68,7 +108,7 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schemas/badrequest'
-  /bookings/{id}:
+  /booking/{id}:
     get: 
       tags:
         - Booking
@@ -166,6 +206,61 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/room'
+                example:
+                  - room_number: 1
+                    description: Your room
+                    available: true
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "250.000 Ar"
+                    }
+                  - room_number: 2
+                    description: Your room
+                    available: false
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "200.000 Ar"
+                    }
+                  - room_number: 3
+                    description: Its room
+                    available: true
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "100.000 Ar"
+                    }
+                  - room_number: 4
+                    description: Its room
+                    available: true
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "100.000 Ar"
+                    }
+                  - room_number: 5
+                    description: Its room
+                    available: true
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "100.000 Ar"
+                    }
+                  - room_number: 6
+                    description: Its room
+                    available: false
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "100.000 Ar"
+                    }
         400:
           description: Bad request
           content:
@@ -350,6 +445,19 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/type'
+                example: 
+                  - id: 1
+                    name: double
+                    description: 1 lit pour 2
+                    price : 100.000 Ar
+                  - id: 2
+                    name: familiale
+                    description: 2 lit pour 2 et 1 lit pour 3
+                    price : 200.000 Ar
+                  - id: 3
+                    name: suite
+                    description: 1 lit pour 2 avec eau chaude
+                    price : 100.000 Ar
         400:
           description: Bad request
           content:
@@ -474,13 +582,22 @@ components:
         client: 
             type: string
             example: Carl Johnson
-        phone_number: 
+        phoneNumber: 
             type: string
             example: "+261302112412"
-        booking_date:
+        bookingDate:
             type: string
             format: date
-        room_type: 
+            example: "2022-07-15"
+        bookingStart:
+          type: string 
+          format: date
+          example: "2022-07-22"
+        bookingEnd: 
+          type: string
+          format: date
+          example: "2022-06-10"
+        roomType: 
             type: string
             example: double
     booking:
@@ -492,6 +609,9 @@ components:
         id: 
           type: integer
           example: 1
+        roomNumber:
+          type: integer
+          example: 2
     addRoom:
       description: description of a new room
       type: object
@@ -499,6 +619,9 @@ components:
         description: 
           type: string
           example: lorem ipsum
+        roomNumber:
+          type: string
+          example: 2
         type:
           type: string
           example: double
@@ -506,7 +629,10 @@ components:
       description: description of a room
       type: object
       properties:
-        room_number:
+        id: 
+          type: number
+          example: 1
+        roomNumber:
           type: number
           example: 1
         description: 
