@@ -25,4 +25,5 @@ public class RoomController {
   ) {
     return roomService.getAllRooms(page, page_size);
   }
+
 }

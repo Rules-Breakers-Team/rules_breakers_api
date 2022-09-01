@@ -36,5 +36,6 @@ public class TypeService {
 
   public Type updateType(Type toUpdate) {
     return typeRepository.save(toUpdate);
+
   }
 }
