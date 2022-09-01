@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class RoomMapper {
   public Room toDomain(com.hackathon.rules_breakers.model.post.Room toCreate) {
     Room domainType = new Room();
-    domainType.setRoom_number(toCreate.getRoom_number());
+    domainType.setRoomNumber(toCreate.getRoom_number());
     domainType.setDescription(toCreate.getDescription());
     domainType.setAvailable(true);
     return domainType;

@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Room {
-  private Long room_number;
+  private String room_number;
   private boolean available = true ;
   private String description;
 }
