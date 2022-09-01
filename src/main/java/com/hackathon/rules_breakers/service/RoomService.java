@@ -15,16 +15,21 @@ import java.util.List;
 public class RoomService {
   private RoomRepository repository;
 
-  public List<Room> getAllRooms(int page, int page_size){
+  public List<Room> getAllRooms(int page, int page_size) {
     Pageable pageable = PageRequest.of(page, page_size);
     return repository.findAll(pageable).toList();
   }
 
-  public List<Room> getRoomByTypeAndAvailable(Type type){
+  public List<Room> getRoomByTypeAndAvailable(Type type) {
     return repository.findRoomByTypeAndAvailable(type);
   }
 
-  public Room updateRoom(Room room){
+  public Room updateRoom(Room room) {
     return repository.save(room);
+  }
+
+  public String addRoom(List<Room> room) {
+    repository.saveAll(room);
+    return "successfully added";
   }
 }

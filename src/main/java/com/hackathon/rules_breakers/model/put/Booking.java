@@ -2,7 +2,6 @@ package com.hackathon.rules_breakers.model.put;
 
 import lombok.Getter;
 import lombok.Setter;
-import com.twilio.Twilio;
 import java.util.Date;
 
 @Getter

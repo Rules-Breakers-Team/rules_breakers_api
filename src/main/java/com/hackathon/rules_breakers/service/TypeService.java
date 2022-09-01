@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +27,6 @@ public class TypeService {
     return typeRepository.findById(id);
   }
 
-  @Transactional
   public String addType(List<Type> type) {
     typeRepository.saveAll(type);
     return "Type successfully added";
@@ -36,6 +34,5 @@ public class TypeService {
 
   public Type updateType(Type toUpdate) {
     return typeRepository.save(toUpdate);
-
   }
 }
