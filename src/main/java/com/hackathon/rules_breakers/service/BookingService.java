@@ -33,10 +33,10 @@ public class BookingService {
   @Transactional
   public List<Booking> saveAllBooking(List<Booking> toCreate) throws Exception {
     if (toCreate.get(0).getRoom() != null) {
-      Twilio.init("ACb0569ff2899c45d39ed10c42bc6741c1",
+    /*  Twilio.init("ACb0569ff2899c45d39ed10c42bc6741c1",
               "9f443f1688388aa645c04fdb5970707c");
       Message.creator(new PhoneNumber(toCreate.get(0).getPhone_number()), new PhoneNumber("+15626627451"), "Bonjour ," +
-              "Votre reservation a ete effectue avec succes . L'equipe NHotel!").create();
+              "Votre reservation a ete effectue avec succes . L'equipe NHotel!").create(); */
       return repository.saveAll(toCreate);
     } else {
       throw new Exception("Il n'y a plus de chambres disponibles " +

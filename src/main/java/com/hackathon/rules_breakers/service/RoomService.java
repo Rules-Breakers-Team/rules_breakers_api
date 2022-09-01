@@ -17,7 +17,7 @@ public class RoomService {
   private  final RoomRepository roomRepository;
 
   public List<Room> getRoom(int page , int page_size){
-    Pageable pageable = PageRequest.of(page, page_size, Sort.by(DESC, "room_number"));
+    Pageable pageable = PageRequest.of(page, page_size, Sort.by(DESC, "roomNumber"));
   return roomRepository.findAll(pageable).toList();
   }
   public String addRoom(List<Room> room) {

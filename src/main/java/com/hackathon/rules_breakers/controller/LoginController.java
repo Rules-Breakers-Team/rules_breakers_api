@@ -21,11 +21,11 @@ public class LoginController {
     @PostMapping(value = "/login" ,consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String login(@RequestBody RegistrationForm users) {
 
-        if(!passwordEncoder.bCryptPasswordEncoder().matches(users.getPassword(),registrationService.getPassword(users.getEmail()) )){
-            return "connexion NON faite";
+        if(passwordEncoder.bCryptPasswordEncoder().matches(users.getPassword(), registrationService.getPassword(users.getEmail()))){
+            registrationService.loadUserByUsername(users.getEmail());
+            return "connexion faite";
         }
         else {
-            registrationService.loadUserByUsername(users.getEmail());
             return "connexion non faite";
         }
     }
