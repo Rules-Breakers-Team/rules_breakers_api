@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,20 +33,26 @@ public class TypeController {
   public List<Type> getType(
           @RequestParam int page,
           @RequestParam int page_size
-          ) throws IllegalArgumentException {
-    return typeService.getType(page,page_size);
+  ) throws IllegalArgumentException {
+    return typeService.getType(page, page_size);
   }
 
   @GetMapping("/{id}")
   public Optional<Type> getTypeById(
           @PathVariable Long id
-  ){
+  ) {
     return typeService.getTypeById(id);
   }
 
   @PostMapping
-  public String addType(@RequestBody List<com.hackathon.rules_breakers.model.post.Type> type){
-    List<Type> typeList = type.stream().map(typeMapper :: toDomain).toList();
+  public String addType(@RequestBody List<com.hackathon.rules_breakers.model.post.Type> type) {
+    List<Type> typeList = type.stream().map(typeMapper::toDomain).toList();
     return typeService.addType(typeList);
+  }
+
+  @PutMapping
+  public Type updateType(@RequestBody com.hackathon.rules_breakers.model.put.Type toUpdate) {
+    Type type = typeMapper.toDomain(toUpdate);
+    return typeService.updateType(type);
   }
 }

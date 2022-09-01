@@ -15,4 +15,12 @@ public class TypeMapper {
     domainType.setPrice(toCreate.getPrice());
     return domainType;
   }
+  public Type toDomain(com.hackathon.rules_breakers.model.put.Type toCreate) {
+    Type domainType = new Type();
+    domainType.setId(toCreate.getId());
+    domainType.setName(toCreate.getName());
+    domainType.setDescription(toCreate.getDescription());
+    domainType.setPrice(toCreate.getPrice());
+    return domainType;
+  }
 }
