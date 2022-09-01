@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+
+@RequestMapping("/room")
 @AllArgsConstructor
-@RequestMapping("/rooms")
+@RestController
 @CrossOrigin("*")
 public class RoomController {
   private RoomService roomService;
