@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,5 +47,13 @@ public class TypeController {
   public String addType(@RequestBody List<com.hackathon.rules_breakers.model.post.Type> type){
     List<Type> typeList = type.stream().map(typeMapper :: toDomain).toList();
     return typeService.addType(typeList);
+  }
+
+  @PutMapping("/{id}")
+  public String changeType(@PathVariable Long id,
+                           @RequestBody List<com.hackathon.rules_breakers.model.post.Type> type
+                           ){
+    List<Type> typeList = type.stream().map(typeMapper :: toDomain).toList();
+    return typeService.changeType(id , typeList);
   }
 }

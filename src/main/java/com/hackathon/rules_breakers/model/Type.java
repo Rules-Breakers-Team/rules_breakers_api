@@ -20,6 +20,11 @@ public class Type implements Serializable {
 
     @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
+    private String description;
+
+    @Column(nullable = false)
+    private String price;
 
     public String getName() {
         return name;
@@ -45,9 +50,5 @@ public class Type implements Serializable {
         this.price = price;
     }
 
-    @Column(nullable = false)
-    private String description;
 
-    @Column(nullable = false)
-    private String price;
 }
