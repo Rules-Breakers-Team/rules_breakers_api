@@ -21,7 +21,7 @@ import java.util.Optional;
 
 @RequestMapping("/types")
 @AllArgsConstructor
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 @Getter
 @EqualsAndHashCode
 @RestController

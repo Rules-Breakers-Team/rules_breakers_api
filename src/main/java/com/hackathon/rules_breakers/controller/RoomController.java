@@ -18,7 +18,7 @@ import java.util.List;
 
 @RequestMapping("/room")
 @AllArgsConstructor
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 @Getter
 @EqualsAndHashCode
 @RestController

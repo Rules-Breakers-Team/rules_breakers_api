@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.data.domain.Sort.Direction.DESC;
+import static org.springframework.data.domain.Sort.Direction.ASC;
 
 @Service
 @AllArgsConstructor
@@ -20,7 +20,7 @@ public class TypeService {
   private final TypeRepository typeRepository;
 
   public List<Type> getType(int page ,int page_size) {
-    Pageable pageable = PageRequest.of(page,page_size , Sort.by(DESC , "price"   ));
+    Pageable pageable = PageRequest.of(page,page_size , Sort.by(ASC , "price"   ));
     return typeRepository.findAll(pageable).toList();
   }
 
