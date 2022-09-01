@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 @RestController
 @EqualsAndHashCode
 public class LoginController {

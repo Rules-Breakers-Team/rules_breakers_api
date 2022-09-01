@@ -18,10 +18,10 @@ import java.util.List;
 
 @RequestMapping("/room")
 @AllArgsConstructor
-@CrossOrigin("http://localhost:3000")
 @Getter
 @EqualsAndHashCode
 @RestController
+@CrossOrigin("*")
 public class RoomController {
 
   private final RoomService roomService;
