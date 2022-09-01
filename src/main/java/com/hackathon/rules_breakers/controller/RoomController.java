@@ -18,10 +18,9 @@ import java.util.List;
 
 @RequestMapping("/room")
 @AllArgsConstructor
-@CrossOrigin("*")
-@Getter
 @EqualsAndHashCode
 @RestController
+@CrossOrigin("*")
 public class RoomController {
 
   private final RoomService roomService;
