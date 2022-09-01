@@ -3,6 +3,9 @@ info:
   title: N Hotel API
   version: '1.0'
 servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/Oniitsiky/n-hotel_api_2/1.0
   - url: https://localhost:8080/
 tags:
   - name: Booking
@@ -28,7 +31,7 @@ paths:
             type: integer
             example: 10
           required: true  
-      responses:
+      responses:  
         200:
           description: Booking list
           content:
@@ -37,6 +40,43 @@ paths:
                 type: array
                 items: 
                   $ref : '#/components/schemas/booking'
+              example: 
+                - client: "Someone"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  roomType: "suite"
+                  bookingStart: "2022-10-10"
+                  roomNumber: 2
+                - client: "Carl Johnson"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  roomType: "double"
+                  bookingStart: "2022-10-10"
+                  roomNumber: 3
+                - client: "Luke"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  roomType: "double"
+                  bookingStart: "2022-10-10"
+                  roomNumber: 2
+                - client: "Byer"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  bookingStart: "2022-10-10"
+                  roomType: "familial"
+                  roomNumber: 24
+                - client: "Billy"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  roomType: "double"
+                  bookingStart: "2022-10-10"
+                  roomNumber: 21
+                - client: "Dustin"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  roomType: "suit"
+                  bookingStart: "2022-10-10"
+                  roomNumber: 9
         400:
           description: Bad request
           content:
@@ -166,6 +206,61 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/room'
+                example:
+                  - room_number: 1
+                    description: Your room
+                    available: true
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "250.000 Ar"
+                    }
+                  - room_number: 2
+                    description: Your room
+                    available: false
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "200.000 Ar"
+                    }
+                  - room_number: 3
+                    description: Its room
+                    available: true
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "100.000 Ar"
+                    }
+                  - room_number: 4
+                    description: Its room
+                    available: true
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "100.000 Ar"
+                    }
+                  - room_number: 5
+                    description: Its room
+                    available: true
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "100.000 Ar"
+                    }
+                  - room_number: 6
+                    description: Its room
+                    available: false
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "100.000 Ar"
+                    }
         400:
           description: Bad request
           content:
@@ -350,6 +445,19 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/type'
+                example: 
+                  - id: 1
+                    name: double
+                    description: 1 lit pour 2
+                    price : 100.000 Ar
+                  - id: 2
+                    name: familiale
+                    description: 2 lit pour 2 et 1 lit pour 3
+                    price : 200.000 Ar
+                  - id: 3
+                    name: suite
+                    description: 1 lit pour 2 avec eau chaude
+                    price : 100.000 Ar
         400:
           description: Bad request
           content:
@@ -474,15 +582,24 @@ components:
         client: 
             type: string
             example: Carl Johnson
-        phone_number: 
+        phoneNumber: 
             type: string
             example: "+261302112412"
-        booking_date:
+        bookingDate:
             type: string
             format: date
-        room_type: 
-            type: integer
-            example: 1
+            example: "2022-07-15"
+        bookingStart:
+          type: string 
+          format: date
+          example: "2022-07-22"
+        bookingEnd: 
+          type: string
+          format: date
+          example: "2022-06-10"
+        roomType: 
+            type: string
+            example: double
     booking:
       description: description of a booking
       allOf:
@@ -492,6 +609,9 @@ components:
         id: 
           type: integer
           example: 1
+        roomNumber:
+          type: integer
+          example: 2
     addRoom:
       description: description of a new room
       type: object
@@ -499,6 +619,9 @@ components:
         description: 
           type: string
           example: lorem ipsum
+        roomNumber:
+          type: string
+          example: 2
         type:
           type: string
           example: double
@@ -506,7 +629,675 @@ components:
       description: description of a room
       type: object
       properties:
-        room_number:
+        id: 
+          type: number
+          example: 1
+        roomNumber:
+          type: number
+          example: 1
+        description: 
+          type: string
+          example: lorem ipsum
+        available: 
+          type: boolean
+        type:
+          $ref: '#/components/schemas/type'
+    addType:
+      description: add a room type
+      type: object
+      properties:
+        name: 
+          type: string
+          example: double
+        description: 
+          type: string
+          example: 1 lit pour 2 personnes
+        price: 
+          type: string
+          example: "100.000 Ar"
+    type:
+      description: rooms type
+      allOf:
+        - $ref: '#/components/schemas/addType'
+      type: object
+      properties:
+        id: 
+          type: integer
+          example: 1openapi: '3.0.2'
+info:
+  title: N Hotel API
+  version: '1.0'
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/Oniitsiky/n-hotel_api_2/1.0
+  - url: https://localhost:8080/
+tags:
+  - name: Booking
+  - name: Room
+  - name: Type
+paths:
+  /booking:
+    get:
+      tags:
+        - Booking
+      summary: Get list of bookings
+      description: How to get booking List
+      parameters:
+        - name: page
+          in: query
+          schema: 
+            type: integer
+            example: 0
+          required: true
+        - name: page_size
+          in: query
+          schema: 
+            type: integer
+            example: 10
+          required: true  
+      responses:  
+        200:
+          description: Booking list
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref : '#/components/schemas/booking'
+              example: 
+                - client: "Someone"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  roomType: "suite"
+                  bookingStart: "2022-10-10"
+                  roomNumber: 2
+                - client: "Carl Johnson"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  roomType: "double"
+                  bookingStart: "2022-10-10"
+                  roomNumber: 3
+                - client: "Luke"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  roomType: "double"
+                  bookingStart: "2022-10-10"
+                  roomNumber: 2
+                - client: "Byer"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  bookingStart: "2022-10-10"
+                  roomType: "familial"
+                  roomNumber: 24
+                - client: "Billy"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  roomType: "double"
+                  bookingStart: "2022-10-10"
+                  roomNumber: 21
+                - client: "Dustin"
+                  phoneNumber: "+261432546"
+                  bookingDate: "2022-09-09"
+                  roomType: "suit"
+                  bookingStart: "2022-10-10"
+                  roomNumber: 9
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+    post:
+      tags:
+        - Booking
+      summary: Make reservation
+      description: How to make a reservation
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items: 
+                $ref: '#/components/schemas/addBooking'
+        required: true
+      responses:
+        200:
+          description: Booking made 
+          content:
+            text/plain:
+              example: Booking made successfully
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+  /booking/{id}:
+    get: 
+      tags:
+        - Booking
+      summary: Get details of a booking
+      description: Get informations of the booking having the entered id
+      parameters:
+        - name: id 
+          in: path
+          schema: 
+            type: integer
+            example: 1
+          required: true
+      responses:
+        200:
+          description: Informations of the specified booking
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/booking'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+    put:
+      tags:
+        - Booking
+      summary: Modify informations of the booking having the entered id
+      description: |
+          Possible changes/updates on: 
+          * client's phone_number:
+          * room type
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            example: 1
+          required: true
+      requestBody:
+        description: informations to be changed 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/room'
+            examples:
+              UpdatePhoneNumber:
+                description: change/update client's phone number
+                value:
+                  newContact: "+261421412412"
+              UpdateRoomType: 
+                description: change/update room's type
+                value: 
+                  newType: Family
+        required: true
+      responses:
+        200:
+          description: Informations updated 
+          content:
+            text/plain:
+              example: Informations updated successfully
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+    
+  /rooms:
+    get:
+      tags:
+        - Room
+      summary: Get list of rooms
+      description: How to get the list of the hotel's rooms
+      parameters:
+        - name: page
+          in: query
+          schema: 
+            type: integer
+            example: 1
+          required: true
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            example: 10
+          required: true
+      responses:
+        200:
+          description: List of the hotel's rooms
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/room'
+                example:
+                  - room_number: 1
+                    description: Your room
+                    available: true
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "250.000 Ar"
+                    }
+                  - room_number: 2
+                    description: Your room
+                    available: false
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "200.000 Ar"
+                    }
+                  - room_number: 3
+                    description: Its room
+                    available: true
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "100.000 Ar"
+                    }
+                  - room_number: 4
+                    description: Its room
+                    available: true
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "100.000 Ar"
+                    }
+                  - room_number: 5
+                    description: Its room
+                    available: true
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "100.000 Ar"
+                    }
+                  - room_number: 6
+                    description: Its room
+                    available: false
+                    type: {
+                      "id": 1,
+                      "name": "double",
+                      "description": "1 lit pour 2",
+                      "price": "100.000 Ar"
+                    }
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+    post:
+      tags:
+        - Room
+      summary: Add new room
+      description: How to add a new room to the list
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items:
+                $ref: '#/components/schemas/addRoom'
+        required: true
+      responses:
+        200:
+          description: New room added to the list
+          content:
+            text/plain:
+              example: Room successfully added to the list 
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+  /rooms/{id}:
+    get: 
+      tags:
+        - Room
+      summary: Get info a room
+      description: Get informations of the room having the entered id
+      parameters:
+        - name: id 
+          in: path
+          schema: 
+            type: integer
+            example: 1
+          required: true
+      responses:
+        200:
+          description: Informations of a specified room
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/room'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+    put:
+      tags:
+        - Room
+      summary: Modify informations of the room having the entered id
+      description: |
+          Possible changes/updates on: 
+          * room's description
+          *room's type
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            example: 1
+          required: true
+      requestBody:
+        description: informations to be changed 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/room'
+            examples:
+              UpdateDescription:
+                description: change/update room's description
+                value:
+                  newDescription: George Washington's room
+              UpdateType: 
+                description: change/update room's type
+                value: 
+                  newType: Family
+        required: true
+      responses:
+        200:
+          description: Informations updated 
+          content:
+            text/plain:
+              example: Informations updated successfully
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+  /rooms/{available}:
+    get: 
+      tags:
+        - Room
+      summary: Get list of rooms according to their availability
+      description: How to filter rooms by their availability
+      parameters:
+        - name: available
+          in: path
+          schema: 
+            type: boolean
+            example: true
+          required: true
+      responses:
+        200:
+          description: List of rooms filtered by their availability
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: '#/components/schemas/room'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+  /rooms/{type}:
+    get:  
+      tags:
+        - Room
+      summary: Get list of rooms according to their type 
+      description: How to filter rooms by their type
+      parameters:
+        - name: type
+          in: path
+          schema: 
+            type: string
+            example: double
+          required: true
+      responses:
+        200:
+          description: List of rooms filtered by their type
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: '#/components/schemas/room'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+  /types:
+    get:
+      tags:
+        - Type
+      summary: Get rooms type
+      description: How to get the rooms type
+      parameters:
+        - name: page
+          in: query
+          schema: 
+            type: integer
+            example: 1
+          required: true
+        - name: page_size
+          in: query
+          schema: 
+            type: integer
+            example: 5
+          required: true
+      responses:
+        200:
+          description: List of room types
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/type'
+                example: 
+                  - id: 1
+                    name: double
+                    description: 1 lit pour 2
+                    price : 100.000 Ar
+                  - id: 2
+                    name: familiale
+                    description: 2 lit pour 2 et 1 lit pour 3
+                    price : 200.000 Ar
+                  - id: 3
+                    name: suite
+                    description: 1 lit pour 2 avec eau chaude
+                    price : 100.000 Ar
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+    post:   
+      tags:
+        - Type
+      summary: Add new room type
+      description: How to add new room type
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items:
+                $ref: '#/components/schemas/addType'
+        required: true
+      responses:
+        200:
+          description: Types successfully added 
+          content:
+            text/plain:
+              example: Types successfully added
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+  /types/{id}:
+    get: 
+      tags:
+        - Type
+      summary: Get room type details
+      description: Get details on the room type having the entered id
+      parameters:
+        - name: id
+          in: path
+          schema: 
+            type: integer
+            example: 1
+          required: true
+      responses:
+        200:
+          description: Details about a room type
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/type'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+    put: 
+      tags:
+        - Type
+      summary: Modify room type details
+      description: |
+        Possible changes/updates on: 
+          * type's name
+          * type's description
+          * type's price 
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            example: 1
+          required: true
+      requestBody:
+        description: informations to be changed 
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/type'
+            examples:
+              UpdadeName: 
+                description: change/update type's name
+                value: 
+                  new_name: Suit
+              UpdateDescription:
+                description: change/update type's description
+                value:
+                  new_description: Obama's Suit
+              UpdatePrice: 
+                description: change/update type's price
+                value:
+                  new_price: 250.000 Ar
+        required: true
+      responses:
+        200:
+          description: Informations updated
+          content:
+            text/plain:
+              example: Informations updated
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/badrequest'
+components:
+  schemas:
+    badrequest:
+      description: Bad request exception
+      type: object
+      properties:
+        type: 
+          type: string
+          example: BadRequestException
+        message:
+          type: string
+          example: Bad request
+    addBooking: 
+      description: description of a new booking
+      type: object
+      properties:
+        client: 
+            type: string
+            example: Carl Johnson
+        phoneNumber: 
+            type: string
+            example: "+261302112412"
+        bookingDate:
+            type: string
+            format: date
+            example: "2022-07-15"
+        bookingStart:
+          type: string 
+          format: date
+          example: "2022-07-22"
+        bookingEnd: 
+          type: string
+          format: date
+          example: "2022-06-10"
+        roomType: 
+            type: string
+            example: double
+    booking:
+      description: description of a booking
+      allOf:
+        - $ref: '#/components/schemas/addBooking'
+      type: object
+      properties:
+        id: 
+          type: integer
+          example: 1
+        roomNumber:
+          type: integer
+          example: 2
+    addRoom:
+      description: description of a new room
+      type: object
+      properties:
+        description: 
+          type: string
+          example: lorem ipsum
+        roomNumber:
+          type: string
+          example: 2
+        type:
+          type: string
+          example: double
+    room: 
+      description: description of a room
+      type: object
+      properties:
+        id: 
+          type: number
+          example: 1
+        roomNumber:
           type: number
           example: 1
         description: 

@@ -7,6 +7,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,8 +19,8 @@ import static org.springframework.data.domain.Sort.Direction.DESC;
 public class TypeService {
   private final TypeRepository typeRepository;
 
-  public List<Type> getType(int page, int page_size) {
-    Pageable pageable = PageRequest.of(page, page_size, Sort.by(DESC, "price"));
+  public List<Type> getType(int page ,int page_size) {
+    Pageable pageable = PageRequest.of(page,page_size , Sort.by(DESC , "price"   ));
     return typeRepository.findAll(pageable).toList();
   }
 
@@ -26,23 +28,13 @@ public class TypeService {
     return typeRepository.findById(id);
   }
 
+  @Transactional
   public String addType(List<Type> type) {
     typeRepository.saveAll(type);
     return "Type successfully added";
   }
 
-  public String changeType(Long id, List<Type> type) {
-    boolean exist = typeRepository.findById(id).isPresent();
-    Type type1 = new Type();
-    for (int i = 0; i < type.size(); i++) {
-      if (exist) {
-        type1.setName(type.get(i).getName());
-        type1.setPrice(type.get(i).getPrice());
-        type1.setDescription(type.get(i).getDescription());
-      }
-      typeRepository.save(type1);
-      return "change type successfully";
-    }
-    return "change type successfully";
+  public Type updateType(Type toUpdate) {
+    return typeRepository.save(toUpdate);
   }
 }

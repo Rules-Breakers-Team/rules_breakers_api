@@ -19,13 +19,19 @@ import java.io.Serializable;
 public class Room implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long room_number;
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String roomNumber;
 
     @Column(nullable = false)
-    private boolean available ;
+    private boolean available = true;
 
     @Column(nullable = false)
     private String description;
 
+    @ManyToOne
+    @JoinColumn
+    private Type type;
 
 }

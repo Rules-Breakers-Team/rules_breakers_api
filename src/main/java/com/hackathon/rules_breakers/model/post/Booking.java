@@ -9,7 +9,9 @@ import java.util.Date;
 @Setter
 public class Booking {
   private String client;
-  private String phone_number;
-  private Long room_type;
-  private Date booking_date;
+  private String phoneNumber;
+  private Long roomType;
+  private Date bookingDate;
+  private Date bookingStart;
+  private Date bookingEnd;
 }

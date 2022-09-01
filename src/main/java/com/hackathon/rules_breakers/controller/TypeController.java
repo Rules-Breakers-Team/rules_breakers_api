@@ -43,17 +43,16 @@ public class TypeController {
   ){
     return typeService.getTypeById(id);
   }
+
   @PostMapping
   public String addType(@RequestBody List<com.hackathon.rules_breakers.model.post.Type> type){
     List<Type> typeList = type.stream().map(typeMapper :: toDomain).toList();
     return typeService.addType(typeList);
   }
 
-  @PutMapping("/{id}")
-  public String changeType(@PathVariable Long id,
-                           @RequestBody List<com.hackathon.rules_breakers.model.post.Type> type
-                           ){
-    List<Type> typeList = type.stream().map(typeMapper :: toDomain).toList();
-    return typeService.changeType(id , typeList);
+  @PutMapping
+  public Type updateType(@RequestBody com.hackathon.rules_breakers.model.put.Type toUpdate) {
+    Type type = typeMapper.toDomain(toUpdate);
+    return typeService.updateType(type);
   }
 }
