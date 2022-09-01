@@ -10,7 +10,9 @@ import java.util.Date;
 public class Booking {
   private Long id;
   private String client;
-  private String phone_number;
-  private Long room_type;
-  private Date booking_date;
+  private String phoneNumber;
+  private Long roomType;
+  private Date bookingDate;
+  private Date bookingStart;
+  private Date bookingEnd;
 }

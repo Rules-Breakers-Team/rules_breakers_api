@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -39,8 +40,17 @@ public class Booking implements Serializable {
   @Column(nullable = false)
   private Date bookingDate;
 
+  @Column(nullable = false)
+  private Date bookingStart;
+
+  @Column(nullable = false)
+  private Date bookingEnd;
+
   @ManyToOne
   @JoinColumn(name = "id_type")
   private Type type;
+
+  @Column(nullable = false)
+  private String room;
 
 }
