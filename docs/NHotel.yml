@@ -712,6 +712,6 @@ components:
         - $ref: '#/components/schemas/addType'
       type: object
       properties:
-        id: 
+        id:
           type: integer
           example: 1
